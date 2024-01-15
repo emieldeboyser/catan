@@ -1,0 +1,65 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.diceCounter div {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.addButton {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: transparent;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  width: 10vw;
+  text-align: center;
+}
+
+.diceCounter {
+  display: flex;
+  flex-direction: column;
+}
+
+.line {
+  height: 5px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+}
+
+.buttonContainer {
+  width: 15vw;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleContainer button {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #ff0000;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.minusButton {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+}
