@@ -10,6 +10,15 @@ function App() {
 
   return (
     <div className="App">
+      <nav className="navigation">
+        <h1>
+          <a href="/">Catan</a>
+        </h1>
+        <div>
+          <a href="/">Make Game</a>
+          {game && <a href="/diceCounter">Dice Counter</a>}
+        </div>
+      </nav>
       <Router>
         <Routes>
           <Route path="/" element={<MakeGameComponent />} />
@@ -17,6 +26,10 @@ function App() {
           <Route path="/endGame" element={<EndGame />} />
         </Routes>
       </Router>
+      <footer>
+        <p> &copy; 2024 Catan</p>
+        <p>Made by Emiel Deboyser</p>
+      </footer>
     </div>
   );
 }
