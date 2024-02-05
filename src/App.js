@@ -14,6 +14,7 @@ function App() {
         <h1>
           <a href="/">Catan</a>
         </h1>
+        <p>test</p>
         <div>
           <a href="/">Make Game</a>
           {game && <a href="/diceCounter">Dice Counter</a>}
