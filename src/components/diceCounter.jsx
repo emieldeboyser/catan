@@ -239,6 +239,10 @@ function DiceCounter() {
       <div className="gameStats">
         <p>Total throws: {totalThrows}</p>
       </div>
+
+      <div>
+        <button onClick={endGame}>End game</button>
+      </div>
     </div>
   );
 }

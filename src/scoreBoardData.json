@@ -1,0 +1,80 @@
+[
+  {
+    "gameName": "Familie <3",
+    "players": {
+      "player1": "Mamatje",
+      "player2": "Zus",
+      "player3": "Emiel",
+      "player4": "Ollie"
+    },
+    "winner": "player1",
+    "diceCounter": {
+      "two": 3,
+      "three": 5,
+      "four": 7,
+      "five": 7,
+      "six": 9,
+      "seven": 19,
+      "eight": 10,
+      "nine": 8,
+      "ten": 8,
+      "eleven": 2,
+      "twelve": 2
+    },
+    "date": 1706301042161,
+    "points": { "player1": 10, "player2": 9, "player3": 9, "player4": 0 },
+    "notes": ""
+  },
+  {
+    "gameName": "Super toffe spelletjes avond",
+    "players": {
+      "player1": "Emiel",
+      "player2": "Lies",
+      "player3": "Bram",
+      "player4": "/"
+    },
+
+    "winner": "player2",
+    "diceCounter": {
+      "two": 2,
+      "three": 3,
+      "four": 6,
+      "five": 14,
+      "six": 16,
+      "seven": 9,
+      "eight": 11,
+      "nine": 5,
+      "ten": 6,
+      "eleven": 4,
+      "twelve": 2
+    },
+    "date": 1705354961916,
+    "points": { "player1": 9, "player2": 10, "player3": 6, "player4": 0 }
+  },
+  {
+    "gameName": "Tweede pot",
+    "players": {
+      "player1": "Emiel",
+      "player2": "Lies",
+      "player3": "Bram",
+      "player4": "/"
+    },
+
+    "winner": "player1",
+    "diceCounter": {
+      "two": 2,
+      "three": 2,
+      "four": 8,
+      "five": 3,
+      "six": 6,
+      "seven": 8,
+      "eight": 5,
+      "nine": 4,
+      "ten": 4,
+      "eleven": 2,
+      "twelve": 3
+    },
+    "date": 1705358012696,
+    "points": { "player1": 8, "player2": 4, "player3": 7, "player4": 0 }
+  }
+]

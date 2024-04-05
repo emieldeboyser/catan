@@ -1,38 +1,30 @@
 import MakeGameComponent from "./components/game";
 import DiceCounter from "./components/diceCounter";
 import EndGame from "./components/endGame";
+import Scoreboard from "./components/scoreboard";
 import "./App.css";
 
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import Header from "./components/header";
+import Footer from "./components/footer";
 
 function App() {
-  const game = localStorage.getItem("game");
-
   return (
     <div className="App">
-      <nav className="navigation">
-        <h1>
-          <a href="/">Catan</a>
-        </h1>
-        <p>test</p>
-        <div>
-          <a href="/">Make Game</a>
-          {game && <a href="/diceCounter">Dice Counter</a>}
-        </div>
-      </nav>
-      <Router>
+      <Header />
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<MakeGameComponent />} />
-          {game && <Route path="/diceCounter" element={<DiceCounter />} />}
+          <Route path="/diceCounter" element={<DiceCounter />} />
           <Route path="/endGame" element={<EndGame />} />
+          <Route path="/scoreboard" element={<Scoreboard />} />
         </Routes>
-      </Router>
-      <footer>
-        <p> &copy; 2024 Catan</p>
-        <p>Made by Emiel Deboyser</p>
-      </footer>
+      </BrowserRouter>
+      <Footer />
     </div>
   );
 }
 
 export default App;
+
+// BIJ WIE IS HET MEESTE GESTOLEN? TODO CREDITS MAXIME VERSTUYFT

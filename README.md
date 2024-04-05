@@ -16,3 +16,12 @@ or just visit:
 ## Author
 
 Emiel Deboyser
+
+## Todo
+
+- [x] Add mongodb connection
+- [x] Add profile page
+- save all data to mongodb
+- make the data available to the user
+- add a graph to the profile page
+- add a graph to the home page
