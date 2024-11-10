@@ -1,137 +1,125 @@
-import React from "react";
-import scoreboardData from "./../scoreBoardData.json";
-import "./scoreboard.css";
+import React, { useEffect } from "react";
+import axios from "axios";
 import crown from "./../crown.svg";
+import { useNavigate } from "react-router-dom";
 
 function Scoreboard() {
-  const sortByDate = scoreboardData.sort((a, b) => {
-    return a.date - b.date;
-  });
+  const [scores, setScores] = React.useState([]);
+  const navigate = useNavigate();
 
-  const deleteGame = (index) => {
-    scoreboardData.splice(index, 1);
+  const fetchScores = async () => {
+    try {
+      const res = await fetch("http://localhost:3001/api/scores");
+      const data = await res.json();
+      setScores(data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
-  const renderScoreboard = sortByDate.map((game, index) => {
-    const points = Object.values(game.points); // Convert points object to an array
+  useEffect(() => {
+    fetchScores();
+  }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      const res = await axios.delete(`http://localhost:3001/api/scores/${id}`);
+      if (res.status === 200) {
+        fetchScores();
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const renderScoreboard = scores.map((game, index) => {
+    const points = Object.values(game.points);
     const gameName = game.gameName;
 
     const renderPlayerNames = game.players
-      ? Object.entries(game.players).map(([key, value], index) => {
+      ? Object.entries(game.players).map(([key, value], idx) => {
           const highestValue = Math.max(...points);
-          const isHighest = points[index] === highestValue;
-          console.log(isHighest);
+          const isHighest = points[idx] === highestValue;
           return (
-            <p key={`${gameName} ${key}`}>
-              {isHighest ? <span>{value}</span> : value}: {points[index]}
+            <p
+              key={`${gameName} ${key}`}
+              className={isHighest ? "font-bold text-green-600" : ""}
+            >
+              {value}: {points[idx]}
             </p>
           );
         })
       : null;
 
     const totalThrows = () => {
-      let totalThrows = 0;
-      const diceCounter = game.diceCounter;
-      for (const outcome in diceCounter) {
-        totalThrows += diceCounter[outcome];
-      }
-      return totalThrows;
+      return Object.values(game.diceCounter).reduce(
+        (sum, count) => sum + count,
+        0
+      );
     };
 
     const mostThrown = () => {
-      let mostThrown = 0;
-      let outcome = "";
-      const diceCounter = game.diceCounter;
-      for (const key in diceCounter) {
-        if (diceCounter[key] > mostThrown) {
-          mostThrown = diceCounter[key];
-          outcome = key;
-        }
-      }
-      const outcomeMapping = {
-        one: 1,
-        two: 2,
-        three: 3,
-        four: 4,
-        five: 5,
-        six: 6,
-        seven: 7,
-        eight: 8,
-        nine: 9,
-        ten: 10,
-        eleven: 11,
-        twelve: 12,
-      };
-      if (outcomeMapping.hasOwnProperty(outcome)) {
-        outcome = outcomeMapping[outcome];
-      }
-      return `${outcome} was thrown ${mostThrown} times`;
+      const [mostOutcome, mostCount] = Object.entries(game.diceCounter).reduce(
+        ([outcome, count], [key, value]) =>
+          value > count ? [key, value] : [outcome, count],
+        ["", 0]
+      );
+      return `${mostOutcome} was thrown ${mostCount} times`;
     };
 
     const leastThrown = () => {
-      let leastThrown = Infinity; // Initialize to a high value
-      let outcome = "";
-      const diceCounter = game.diceCounter;
-      for (const key in diceCounter) {
-        if (diceCounter[key] < leastThrown) {
-          leastThrown = diceCounter[key];
-          outcome = key;
-        }
-      }
-      const outcomeMapping = {
-        one: 1,
-        two: 2,
-        three: 3,
-        four: 4,
-        five: 5,
-        six: 6,
-        seven: 7,
-        eight: 8,
-        nine: 9,
-        ten: 10,
-        eleven: 11,
-        twelve: 12,
-      };
-      if (outcomeMapping.hasOwnProperty(outcome)) {
-        outcome = outcomeMapping[outcome];
-      }
-
-      if (leastThrown === Infinity) {
-        return "No outcome was thrown";
-      } else {
-        return `${outcome} was thrown ${leastThrown} times`;
-      }
+      const [leastOutcome, leastCount] = Object.entries(
+        game.diceCounter
+      ).reduce(
+        ([outcome, count], [key, value]) =>
+          value < count ? [key, value] : [outcome, count],
+        ["", Infinity]
+      );
+      return leastCount === Infinity
+        ? "No outcome was thrown"
+        : `${leastOutcome} was thrown ${leastCount} times`;
     };
 
     return (
-      <div key={index} className="card">
-        <button
-          onClick={() => {
-            deleteGame(index);
-          }}
-        >
-          delete game
-        </button>
-        <h3>{game.gameName}</h3>
-        <p>
-          Date:{" "}
-          {new Date(game.date).toLocaleTimeString() +
-            " " +
-            new Date(game.date).toLocaleDateString()}
+      <div
+        key={index}
+        className="bg-white shadow-md rounded-lg p-6 mb-6 w-['120px]"
+        onClick={() => navigate(`/scoreboard/${game._id}`)}
+      >
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-semibold text-gray-800">
+            {game.gameName}
+          </h3>
+          <button
+            onClick={() => handleDelete(game._id)}
+            className="text-red-500 hover:text-red-700 font-bold"
+          >
+            Delete
+          </button>
+        </div>
+        <p className="text-gray-600">
+          Date: {new Date(game.date).toLocaleString()}
         </p>
-        <p>Players: {renderPlayerNames}</p>
-        <p>Winner: {game.winner}</p>
-        <p>Total throws: {totalThrows()}</p>
-        <p>{mostThrown()}</p>
-        <p>{leastThrown()}</p>
+        <p className="text-gray-800 mt-2">Players:</p>
+        <div className="pl-4">{renderPlayerNames}</div>
+        <p className="text-gray-800 mt-2">Winner: {game.winner}</p>
+        <p className="text-gray-800">Total throws: {totalThrows()}</p>
+        <p className="text-gray-800">{mostThrown()}</p>
+        <p className="text-gray-800">{leastThrown()}</p>
       </div>
     );
   });
 
   return (
-    <div className="scoreboard">
-      <h2>Scoreboard</h2>
-      <div className="cardContainer">{renderScoreboard}</div>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10">
+      <h2 className="text-3xl font-bold text-gray-700 mb-6">Scoreboard</h2>
+      {scores.length === 0 ? (
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <p className="text-gray-600">No games played yet</p>
+        </div>
+      ) : (
+        <div className="flex flex-row">{renderScoreboard}</div>
+      )}
     </div>
   );
 }

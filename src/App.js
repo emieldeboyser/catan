@@ -7,6 +7,7 @@ import "./App.css";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Header from "./components/header";
 import Footer from "./components/footer";
+import ScoreboardElement from "./components/ScoreboardElement";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/diceCounter" element={<DiceCounter />} />
           <Route path="/endGame" element={<EndGame />} />
           <Route path="/scoreboard" element={<Scoreboard />} />
+          <Route path="/scoreboard/:id" element={<ScoreboardElement />} />
         </Routes>
       </BrowserRouter>
       <Footer />

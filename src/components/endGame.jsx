@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 function EndGame() {
   const [winner, setWinner] = useState();
@@ -12,7 +13,7 @@ function EndGame() {
 
   const diceCounter = JSON.parse(localStorage.getItem("diceCounter"));
 
-  const sentToDB = (e) => {
+  const sentToDB = async (e) => {
     e.preventDefault();
     const stats = {
       gameName: game.gameName,
@@ -32,19 +33,15 @@ function EndGame() {
       notes: note,
     };
 
-    console.log(stats);
-    // Send stats to database
-    localStorage.setItem("stats", JSON.stringify(stats, null, 2));
-
-    handleSaveToPC(stats, "game_stats");
-
-    // Clear local storage
-    localStorage.removeItem("game");
-    localStorage.removeItem("diceCounter");
-    localStorage.removeItem("stats");
-
-    // Redirect to home page
-    window.location.href = "/";
+    try {
+      const res = await axios.post("http://localhost:3001/api/scores", stats);
+      if (res.status === 200) {
+        window.location.href = "/";
+      }
+      console.log(res);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const renderPointsPP = (player, setPoints) => {

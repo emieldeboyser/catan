@@ -11,6 +11,7 @@ const Header = () => {
         <div>
           <a href="/">Make Game</a>
           {game && <a href="/diceCounter">Dice Counter</a>}
+          {game && <a href="/scoreboard">Scoreboard</a>}
         </div>
       </nav>
     </>
