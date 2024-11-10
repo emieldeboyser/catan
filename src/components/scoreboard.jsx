@@ -98,7 +98,17 @@ function Scoreboard() {
           </button>
         </div>
         <p className="text-gray-600">
-          Date: {new Date(game.date).toLocaleString()}
+          {new Date(game.date).toLocaleDateString("en-GB", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}{" "}
+        </p>
+        <p className="text-gray-800">
+          {new Date(game.date).toLocaleTimeString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
         </p>
         <p className="text-gray-800 mt-2">Players:</p>
         <div className="pl-4">{renderPlayerNames}</div>
