@@ -13,7 +13,6 @@ function DiceCounter({ data }) {
   const [eleven, setEleven] = useState(0);
   const [twelve, setTwelve] = useState(0);
   const [totalThrows, setTotalThrows] = useState(0);
-  const [lastDigitPressed] = useState([]);
 
   // Use useEffect to initialize state from data prop
   useEffect(() => {
@@ -74,8 +73,8 @@ function DiceCounter({ data }) {
 
   return (
     <div className="p-4">
-      <div className="hero bg-gray-100 p-6 rounded-lg shadow-lg flex w-full justify-center">
-        <div className="graphic grid grid-cols-12 gap-4">
+      <div className="hero bg-gray-700 p-6 rounded-lg shadow-lg flex w-full justify-center">
+        <div className="graphic grid grid-cols-12 gap-4 bg-blue-900">
           {renderTable("2", two)}
           {renderTable("3", three)}
           {renderTable("4", four)}

@@ -38,7 +38,6 @@ function EndGame() {
       if (res.status === 200) {
         window.location.href = "/";
       }
-      console.log(res);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -97,16 +96,6 @@ function EndGame() {
       average: average,
     };
   }
-
-  const handleSaveToPC = (jsonData, filename) => {
-    const fileData = JSON.stringify(jsonData);
-    const blob = new Blob([fileData], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.download = `${filename}.json`;
-    link.href = url;
-    link.click();
-  };
 
   return (
     <div>

@@ -8,11 +8,11 @@ const ScoreboardElement = () => {
   const [scores, setScores] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchScores = async () => {
     try {
       const res = await axios.get(`http://localhost:3001/api/scores/${id}`);
       const data = res.data;
-      console.log(data);
       setScores(data);
       setIsLoaded(true);
     } catch (error) {
@@ -22,7 +22,7 @@ const ScoreboardElement = () => {
 
   useEffect(() => {
     fetchScores(id);
-  }, [id]);
+  }, [fetchScores, id]);
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4 w-100">

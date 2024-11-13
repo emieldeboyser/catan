@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import crown from "./../crown.svg";
 import { useNavigate } from "react-router-dom";
 
 function Scoreboard() {
