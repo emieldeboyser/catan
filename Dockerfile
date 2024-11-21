@@ -1,15 +1,21 @@
-FROM node:alpine
+# Stage 1: Build the React app
+FROM node:alpine AS build
 # Set the working directory
 WORKDIR /build
-# Copy the package.json and package-lock.json files
+# Copy package.json and lock files
 COPY package*.json ./
-# Install the dependencies
+# Install dependencies
 RUN yarn install
-# Copy the app files
+# Copy the app source code
 COPY . .
-# Build the app
+# Build the React app
 RUN yarn run build
-# Expose the port
-EXPOSE 3000
-# Run the app
-CMD ["yarn", "start"]
+
+# Stage 2: Serve the React app with Nginx
+FROM nginx:alpine
+# Copy the built React app to Nginx's default static directory
+COPY --from=build /build/build /usr/share/nginx/html
+# Expose the port on which the app runs
+EXPOSE 80
+# Default command to run Nginx
+CMD ["nginx", "-g", "daemon off;"]
