@@ -1,0 +1,16 @@
+{
+  "Error": "Erreur",
+  "Close": "Fermer",
+  "Some error message": "Une erreur inattendue s'est produite. Veuillez réessayer.",
+  "validaties": {
+    "required": "Ce champ est requis",
+    "email": "Veuillez entrer une adresse e-mail valide",
+    "min": "Veuillez entrer une valeur supérieure ou égale à {0}",
+    "max": "Veuillez entrer une valeur inférieure ou égale à {0}",
+    "minLength": "Veuillez entrer au moins {0} caractères",
+    "maxLength": "Veuillez entrer au maximum {0} caractères",
+    "pattern": "Veuillez respecter le format demandé",
+    "confirmPassword": "Les mots de passe ne correspondent pas",
+    "gameName": "Veuillez entrer un nom de jeu valide"
+  }
+}

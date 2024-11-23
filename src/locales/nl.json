@@ -1,0 +1,38 @@
+{
+  "Error": "Fout",
+  "Close": "Sluiten",
+  "Some error message": "Er is een onverwachte fout opgetreden. Probeer het opnieuw.",
+  "validaties": {
+    "required": "Dit veld is verplicht",
+    "email": "Voer een geldig e-mailadres in",
+    "min": "Voer een waarde in die groter is dan of gelijk is aan {0}",
+    "max": "Voer een waarde in die kleiner is dan of gelijk is aan {0}",
+    "minLength": "Voer minimaal {0} tekens in",
+    "maxLength": "Voer maximaal {0} tekens in",
+    "pattern": "Voldoe aan het gevraagde formaat",
+    "confirmPassword": "Wachtwoorden komen niet overeen",
+    "gameName": "Voer een geldige spelnaam in"
+  },
+  "gameSettings": {
+    "gameName": "Spelnaam",
+    "gameNamePlaceholder": "Voer een spelnaam in",
+    "gameNameError": "Voer een geldige spelnaam in",
+    "playerName": "Spelernaam",
+    "playerNamePlaceholder": "Voer een spelernaam in",
+    "playerNameError": "Voer een geldige spelernaam in"
+  },
+  "buttons": {
+    "createGame": "Maak spel aan",
+    "joinGame": "Doe mee aan spel",
+    "addPlayer": "Speler toevoegen"
+  },
+  "spel": {
+    "titel": "Catan",
+    "logo": "Catan counter"
+  },
+  "nav": {
+    "makeGame": "Maak spel",
+    "DiceCounter": "Dobbelsteen teller",
+    "Scoreboard": "Scorebord"
+  }
+}

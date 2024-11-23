@@ -1,0 +1,38 @@
+{
+  "Error": "Error",
+  "Close": "Close",
+  "Some error message": "An unexpected error occurred. Please try again.",
+  "validaties": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "min": "Please enter a value greater than or equal to {0}",
+    "max": "Please enter a value less than or equal to {0}",
+    "minLength": "Please enter at least {0} characters",
+    "maxLength": "Please enter no more than {0} characters",
+    "pattern": "Please match the requested format",
+    "confirmPassword": "Passwords do not match",
+    "gameName": "Please enter a valid game name"
+  },
+  "gameSettings": {
+    "gameName": "Game Name",
+    "gameNamePlaceholder": "Enter a game name",
+    "gameNameError": "Enter a valid game name",
+    "playerName": "Player Name",
+    "playerNamePlaceholder": "Enter a player name",
+    "playerNameError": "Enter a valid player name"
+  },
+  "buttons": {
+    "createGame": "Create Game",
+    "joinGame": "Join Game",
+    "addPlayer": "Add Player"
+  },
+  "spel": {
+    "titel": "Catan",
+    "logo": "Catan Counter"
+  },
+  "nav": {
+    "makeGame": "Create Game",
+    "DiceCounter": "Dice Counter",
+    "Scoreboard": "Scoreboard"
+  }
+}

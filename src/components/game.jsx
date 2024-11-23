@@ -3,16 +3,19 @@ import "./game.css";
 import Inputveld from "./atoms/inputveld";
 import Button from "./atoms/button";
 import bg from "../images/bg.jpg";
+import ErrorAlert from "./atoms/error";
+import { t } from "i18next";
 
 const Game = () => {
   const [inputFields, setInputFields] = useState([
-    { id: "player1", value: "", placeholder: "Player 1" },
-    { id: "player2", value: "", placeholder: "Player 2" },
+    { id: "player1", value: "", placeholder: "gameSettings.playerName" },
+    { id: "player2", value: "", placeholder: "gameSettings.playerName" },
   ]);
   const [game, setGame] = useState({
     gameName: "",
     date: Date.now(),
   });
+  const [alert, setAlert] = useState("");
 
   // Handle changes in the input fields
   const handleChange = (e) => {
@@ -32,8 +35,20 @@ const Game = () => {
     );
   };
 
+  const closeAlert = () => {
+    setAlert("");
+    console.log("close");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // see if fields are filled in
+    if (game.gameName === "") {
+      setAlert("validaties.gameName");
+      return;
+    }
+
     // Update the game object with the input field values
     const updatedGame = {
       ...game,
@@ -60,7 +75,7 @@ const Game = () => {
       {
         id: `player${prevInputFields.length + 1}`,
         value: "",
-        placeholder: `Player ${prevInputFields.length + 1}`,
+        placeholder: `gameSettings.playerName`,
       },
     ]);
   };
@@ -74,7 +89,9 @@ const Game = () => {
 
   return (
     <div className="app" style={backgroundStyle}>
-      <h1 className="text-4xl text-center font-bold pt-14 mb-10">Game</h1>
+      <h1 className="text-4xl text-center font-bold pt-14 mb-10">
+        {t("spel.titel")}
+      </h1>
       <div className="flex flex-col mx-96 bg-white rounded-sm">
         <form
           onSubmit={handleSubmit}
@@ -83,7 +100,7 @@ const Game = () => {
           <Inputveld
             value={game.gameName}
             onChange={handleChange}
-            placeholder="Game Name"
+            placeholder={t("gameSettings.gameName")}
             id="gameName"
             hideClose={true}
           />
@@ -95,7 +112,7 @@ const Game = () => {
               <Inputveld
                 value={inputField.value}
                 onChange={handleChange}
-                placeholder={inputField.placeholder}
+                placeholder={t(inputField.placeholder) + " " + (index + 1)}
                 id={inputField.id}
                 name={inputField.id} // Ensure the name matches the id
                 deleteInput={() => deleteInput(inputField.id)}
@@ -103,10 +120,11 @@ const Game = () => {
             </div>
           ))}
 
-          <Button>Start</Button>
+          <Button>{t("buttons.createGame")}</Button>
         </form>
-        <Button onClick={addInput}>Add Player</Button>
+        <Button onClick={addInput}>{t("buttons.addPlayer")}</Button>
       </div>
+      <div>{alert && <ErrorAlert message={alert} close={closeAlert} />}</div>{" "}
     </div>
   );
 };
