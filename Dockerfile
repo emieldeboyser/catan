@@ -1,21 +1,29 @@
-# Stage 1: Build the React app
-FROM node:alpine AS build
-# Set the working directory
-WORKDIR /build
-# Copy package.json and lock files
-COPY package*.json ./
-# Install dependencies
-RUN yarn install
-# Copy the app source code
-COPY . .
-# Build the React app
-RUN yarn run build
+# Use official Node.js 20 image as base image
+FROM node:20 AS build
 
-# Stage 2: Serve the React app with Nginx
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy package.json and yarn.lock files to the working directory
+COPY package.json yarn.lock ./
+
+# Install dependencies using yarn
+RUN yarn install
+
+# Copy the rest of the application code to the working directory
+COPY . .
+
+# Build the React app
+RUN yarn build
+
+# Use nginx to serve the built app
 FROM nginx:alpine
-# Copy the built React app to Nginx's default static directory
-COPY --from=build /build/build /usr/share/nginx/html
-# Expose the port on which the app runs
+
+# Copy the build output from the build stage to the nginx container
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Expose port 80 for the app
 EXPOSE 80
-# Default command to run Nginx
+
+# Start nginx
 CMD ["nginx", "-g", "daemon off;"]

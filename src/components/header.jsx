@@ -38,11 +38,10 @@ const Header = () => {
             {t("nav.DiceCounter")}
           </a>
         )}
-        {game && (
-          <a href="/scoreboard" className="text-sm">
-            {t("nav.Scoreboard")}
-          </a>
-        )}
+
+        <a href="/scoreboard" className="text-sm">
+          {t("nav.Scoreboard")}
+        </a>
       </div>
       {/* <ChangeLanguage currentLanguage={taal} /> */}
     </nav>
