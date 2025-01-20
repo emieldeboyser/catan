@@ -11,7 +11,9 @@ const ScoreboardElement = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchScores = async () => {
     try {
-      const res = await axios.get(`http://localhost:3001/api/scores/${id}`);
+      const res = await axios.get(
+        `https://catan-server-nodejs-production.up.railway.app/api/scores/${id}`
+      );
       const data = res.data;
       setScores(data);
       setIsLoaded(true);

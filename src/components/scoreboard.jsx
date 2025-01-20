@@ -8,7 +8,9 @@ function Scoreboard() {
 
   const fetchScores = async () => {
     try {
-      const res = await fetch("http://localhost:3001/api/scores");
+      const res = await fetch(
+        "https://catan-server-nodejs-production.up.railway.app/api/scores"
+      );
       const data = await res.json();
       setScores(data);
     } catch (error) {
@@ -22,7 +24,9 @@ function Scoreboard() {
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:3001/api/scores/${id}`);
+      const res = await axios.delete(
+        `https://catan-server-nodejs-production.up.railway.app/api/scores/${id}`
+      );
       if (res.status === 200) {
         fetchScores();
       }

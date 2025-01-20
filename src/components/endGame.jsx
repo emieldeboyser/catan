@@ -34,7 +34,10 @@ function EndGame() {
     };
 
     try {
-      const res = await axios.post("http://localhost:3001/api/scores", stats);
+      const res = await axios.post(
+        "https://catan-server-nodejs-production.up.railway.app/api/scores",
+        stats
+      );
       if (res.status === 200) {
         window.location.href = "/";
       }
