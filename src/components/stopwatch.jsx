@@ -36,9 +36,8 @@ const Stopwatch = ({ start, stop }) => {
     localStorage.setItem("time", JSON.stringify(time));
   };
 
-  const handleReset = () => {
-    setIsActive(false);
-    setTime(0);
+  const handleResume = () => {
+    setIsActive(true);
   };
 
   return (
@@ -51,15 +50,21 @@ const Stopwatch = ({ start, stop }) => {
         {formatTime(time)}
       </div>
       <div className="w-100 flex justify-between">
-        <button onClick={handleStop} className="bg-red-300 p-3 rounded-lg w-20">
-          Stop
-        </button>
-        <button
-          onClick={handleReset}
-          className="bg-white border-black border p-3 rounded-lg w-20"
-        >
-          Reset
-        </button>
+        {isActive ? (
+          <button
+            onClick={handleStop}
+            className="bg-red-300 p-3 rounded-lg w-full"
+          >
+            Stop
+          </button>
+        ) : (
+          <button
+            onClick={handleResume}
+            className="bg-green-300 p-3 rounded-lg w-full"
+          >
+            Resume
+          </button>
+        )}
       </div>
     </div>
   );

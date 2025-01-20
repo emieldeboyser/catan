@@ -92,10 +92,11 @@ const Game = () => {
       <h1 className="text-4xl text-center font-bold pt-14 mb-10">
         {t("spel.titel")}
       </h1>
-      <div className="flex flex-col mx-96 bg-white rounded-sm">
+      <div className="flex flex-col bg-white rounded-lg mx-auto my-0  w-[350px]">
+        <h2 className="text-center pt-5">Add game</h2>
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col items-center py-12 gap-3"
+          className="flex flex-col items-center pt-5 pb-12 gap-3"
         >
           <Inputveld
             value={game.gameName}

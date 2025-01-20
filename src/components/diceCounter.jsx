@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import "./diceCounter.css";
 import Stopwatch from "./stopwatch";
+import Header from "./header";
 
 function DiceCounter() {
   const [two, setTwo] = useState(0);
@@ -171,21 +172,46 @@ function DiceCounter() {
 
   return (
     <>
+      <Header inGame={true} />
       <div className="diceCounter px-10 mt-20">
         <div className="hero">
-          <div className="graphic bg-slate-500 rounded-b-none rounded-t-lg	">
-            {renderTable("2", two)}
-            {renderTable("3", three)}
-            {renderTable("4", four)}
-            {renderTable("5", five)}
-            {renderTable("6", six)}
-            {renderTable("7", seven)}
-            {renderTable("8", eight)}
-            {renderTable("9", nine)}
-            {renderTable("10", ten)}
-            {renderTable("11", eleven)}
-            {renderTable("12", twelve)}
+          <div className="table">
+            <div className="graphic bg-slate-500 rounded-b-none rounded-t-lg	">
+              {renderTable("2", two)}
+              {renderTable("3", three)}
+              {renderTable("4", four)}
+              {renderTable("5", five)}
+              {renderTable("6", six)}
+              {renderTable("7", seven)}
+              {renderTable("8", eight)}
+              {renderTable("9", nine)}
+              {renderTable("10", ten)}
+              {renderTable("11", eleven)}
+              {renderTable("12", twelve)}
+            </div>
+            <div className="gameStats bg-gray-300 w-full p-4 rounded-b-lg flex justify-between items-end">
+              <div className="w-1/2">
+                <p>Total throws: {totalThrows}</p>
+                <p>
+                  Last thrown:{" "}
+                  {lastDigitPressed.length > 0 && (
+                    <>
+                      <span className="text-red-500 font-bold">
+                        {lastDigitPressed[0] + ","}{" "}
+                      </span>
+                      {lastDigitPressed.slice(1).join(", ")}
+                    </>
+                  )}
+                </p>
+              </div>
+              <div className="bg-red-500 hover:bg-red-800 font-semibold w-1/3 flex items-center justify-center h-10 rounded-lg z-10">
+                <button onClick={endGame} className="text-white">
+                  End game
+                </button>
+              </div>
+            </div>
           </div>
+
           <div className="flex flex-col items-center">
             <div className="h-5">
               {lastDigitPressed.length === 0 && <p>Press dice to start game</p>}
@@ -220,31 +246,12 @@ function DiceCounter() {
             </div>
           </div>
         </div>
-        <div className="gameStats bg-gray-300 w-1/2 p-4 rounded-b-lg">
-          <p>Total throws: {totalThrows}</p>
-          <p>
-            Last thrown:{" "}
-            {lastDigitPressed.length > 0 && (
-              <>
-                <span className="text-red-500 font-bold">
-                  {lastDigitPressed[0] + ","}{" "}
-                </span>
-                {lastDigitPressed.slice(1).join(", ")}
-              </>
-            )}
-          </p>
-        </div>
       </div>
       <div className="w-screen flex justify-end px-10">
         <Stopwatch start={startTimer} stop={stop} />
       </div>
 
       {/* Button */}
-      <div className="bg-red-500 hover:bg-red-800 w-40 font-semibold flex items-center justify-center h-10 rounded-lg absolute bottom-12 right-10 z-10">
-        <button onClick={endGame} className="text-white">
-          End game
-        </button>
-      </div>
     </>
   );
 }
